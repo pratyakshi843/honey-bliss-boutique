@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,6 +53,42 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				honey: {
+					50: "#FFF8E1",
+					100: "#FFECB3",
+					200: "#FFE082",
+					300: "#FFD54F",
+					400: "#FFCA28",
+					500: "#FFC107",
+					600: "#FFB300",
+					700: "#FFA000",
+					800: "#FF8F00",
+					900: "#FF6F00"
+				},
+				amber: {
+					50: "#FFFBEB",
+					100: "#FEF3C7", 
+					200: "#FDE68A",
+					300: "#FCD34D",
+					400: "#FBBF24",
+					500: "#F59E0B",
+					600: "#D97706",
+					700: "#B45309",
+					800: "#92400E",
+					900: "#78350F"
+				},
+				brown: {
+					50: "#EFEBE9",
+					100: "#D7CCC8",
+					200: "#BCAAA4",
+					300: "#A1887F",
+					400: "#8D6E63",
+					500: "#795548",
+					600: "#6D4C41",
+					700: "#5D4037",
+					800: "#4E342E",
+					900: "#3E2723"
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +121,55 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'honey-drip': {
+					'0%': { 
+						transform: 'translateY(-100%)',
+						opacity: '0'
+					},
+					'50%': { 
+						transform: 'translateY(0)',
+						opacity: '1'
+					},
+					'100%': { 
+						transform: 'translateY(100%)',
+						opacity: '0'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'pulse-gentle': {
+					'0%, 100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					},
+					'50%': {
+						opacity: '0.85',
+						transform: 'scale(1.05)'
+					}
+				},
+				'rotate-slow': {
+					'0%': {
+						transform: 'rotate(0deg)'
+					},
+					'100%': {
+						transform: 'rotate(360deg)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'honey-drip': 'honey-drip 3s ease-in-out infinite',
+				'float': 'float 3s ease-in-out infinite',
+				'pulse-gentle': 'pulse-gentle 3s ease-in-out infinite',
+				'rotate-slow': 'rotate-slow 12s linear infinite'
 			}
 		}
 	},
