@@ -1,9 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { addToCart } from '../store/cartSlice';
-import { toggleFavorite } from '../store/favoritesSlice';
+import { useCartStore, useFavoritesStore } from '../store/hooks';
 import { toast } from 'sonner';
 import { getProductById } from '../data/products';
 import { Button } from '@/components/ui/button';
@@ -26,11 +23,12 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [quantity, setQuantity] = useState(1);
   const [rotateY, setRotateY] = useState(0);
-  const dispatch = useAppDispatch();
-  const favorites = useAppSelector((state) => state.favorites.items);
+  
+  const addToCart = useCartStore((state) => state.addToCart);
+  const favorites = useFavoritesStore((state) => state.items);
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
   
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, [id]);
   
@@ -60,28 +58,26 @@ const ProductDetail = () => {
   };
   
   const handleAddToCart = () => {
-    dispatch(
+    for (let i = 0; i < quantity; i++) {
       addToCart({
         id: product.id,
         name: product.name,
         price: product.price,
         image: product.image,
         weight: product.weight,
-      })
-    );
+      });
+    }
     toast.success(`Added ${quantity} ${quantity === 1 ? 'item' : 'items'} to cart`);
   };
   
   const handleToggleFavorite = () => {
-    dispatch(
-      toggleFavorite({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        weight: product.weight,
-      })
-    );
+    toggleFavorite({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      weight: product.weight,
+    });
     
     if (isFavorite) {
       toast.info(`${product.name} removed from favorites`);
@@ -113,7 +109,6 @@ const ProductDetail = () => {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Product Image */}
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -147,7 +142,6 @@ const ProductDetail = () => {
           </div>
         </motion.div>
         
-        {/* Product Info */}
         <motion.div 
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -273,7 +267,6 @@ const ProductDetail = () => {
         </motion.div>
       </div>
       
-      {/* Product Details */}
       <div className="mt-16">
         <Tabs defaultValue="details">
           <TabsList className="w-full border-b grid grid-cols-3 rounded-none bg-transparent">
@@ -413,7 +406,6 @@ const ProductDetail = () => {
           
           <TabsContent value="reviews" className="py-6">
             <div className="space-y-6">
-              {/* Review summary */}
               <div className="bg-gray-50 p-6 rounded-lg flex flex-col md:flex-row md:items-center">
                 <div className="md:w-1/4 text-center mb-6 md:mb-0">
                   <div className="text-5xl font-bold text-honey-600">4.0</div>
@@ -461,7 +453,6 @@ const ProductDetail = () => {
                 </div>
               </div>
               
-              {/* Review list */}
               <div className="space-y-6">
                 {[
                   {

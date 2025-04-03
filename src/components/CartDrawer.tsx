@@ -1,21 +1,14 @@
 
 import { useEffect, useRef } from "react";
-import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { 
-  toggleCart, 
-  closeCart, 
-  removeFromCart, 
-  removeItemCompletely,
-  clearCart 
-} from "../store/cartSlice";
-import { Plus, Minus, X, ShoppingBag, Trash2 } from "lucide-react";
+import { useCartStore } from "../store/hooks";
+import { ShoppingBag, Plus, Minus, X, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { Link } from "react-router-dom";
 
 const CartDrawer = () => {
-  const dispatch = useAppDispatch();
-  const { items, isOpen } = useAppSelector((state) => state.cart);
+  const { items, isOpen, toggleCart, closeCart, removeFromCart, 
+         addToCart, removeItemCompletely, clearCart } = useCartStore();
   const cartRef = useRef<HTMLDivElement>(null);
 
   const totalAmount = items.reduce(
@@ -29,7 +22,7 @@ const CartDrawer = () => {
       !cartRef.current.contains(event.target as Node) &&
       isOpen
     ) {
-      dispatch(closeCart());
+      closeCart();
     }
   };
 
@@ -63,7 +56,7 @@ const CartDrawer = () => {
         <div className="flex justify-between items-center p-4 border-b">
           <h2 className="text-xl font-semibold">Your Cart</h2>
           <button
-            onClick={() => dispatch(toggleCart())}
+            onClick={() => toggleCart()}
             className="p-1 rounded-full hover:bg-gray-100"
           >
             <X className="h-6 w-6" />
@@ -78,7 +71,7 @@ const CartDrawer = () => {
               Looks like you haven't added any honey to your cart yet.
             </p>
             <Button 
-              onClick={() => dispatch(toggleCart())}
+              onClick={() => toggleCart()}
               className="bg-honey-600 hover:bg-honey-700"
             >
               Continue Shopping
@@ -109,7 +102,7 @@ const CartDrawer = () => {
                   <div className="flex flex-col items-center ml-2">
                     <div className="flex items-center border rounded-md">
                       <button
-                        onClick={() => dispatch(removeFromCart(item.id))}
+                        onClick={() => removeFromCart(item.id)}
                         className="p-1 hover:bg-gray-100"
                       >
                         <Minus className="h-4 w-4" />
@@ -117,8 +110,14 @@ const CartDrawer = () => {
                       <span className="px-2 text-sm">{item.quantity}</span>
                       <button
                         onClick={() =>
-                          dispatch(
-                            { id: item.id, name: item.name, price: item.price, image: item.image, weight: item.weight }
+                          addToCart(
+                            {
+                              id: item.id,
+                              name: item.name,
+                              price: item.price,
+                              image: item.image,
+                              weight: item.weight
+                            }
                           )
                         }
                         className="p-1 hover:bg-gray-100"
@@ -127,7 +126,7 @@ const CartDrawer = () => {
                       </button>
                     </div>
                     <button
-                      onClick={() => dispatch(removeItemCompletely(item.id))}
+                      onClick={() => removeItemCompletely(item.id)}
                       className="p-1 mt-2 text-red-500 hover:text-red-700"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -155,12 +154,12 @@ const CartDrawer = () => {
                 className="w-full bg-honey-600 hover:bg-honey-700"
                 asChild
               >
-                <Link to="/checkout" onClick={() => dispatch(closeCart())}>
+                <Link to="/checkout" onClick={() => closeCart()}>
                   Proceed to Checkout
                 </Link>
               </Button>
               <button
-                onClick={() => dispatch(clearCart())}
+                onClick={() => clearCart()}
                 className="w-full mt-2 text-sm text-gray-500 hover:text-gray-700"
               >
                 Clear Cart

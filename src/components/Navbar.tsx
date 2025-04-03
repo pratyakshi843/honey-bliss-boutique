@@ -2,18 +2,19 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, Heart, User, Menu, X } from 'lucide-react';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { toggleCart } from '../store/cartSlice';
+import { useCartStore, useFavoritesStore, useAuthStore } from '../store/hooks';
 import { Button } from './ui/button';
 import CartDrawer from './CartDrawer';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const dispatch = useAppDispatch();
-  const cartItems = useAppSelector((state) => state.cart.items);
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const favorites = useAppSelector((state) => state.favorites.items);
+  
+  // Use Zustand stores directly
+  const cartItems = useCartStore((state) => state.items);
+  const toggleCart = useCartStore((state) => state.toggleCart);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const favorites = useFavoritesStore((state) => state.items);
 
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   
@@ -22,7 +23,7 @@ const Navbar = () => {
   };
 
   const openCart = () => {
-    dispatch(toggleCart());
+    toggleCart();
   };
 
   const isActive = (path: string) => {

@@ -1,8 +1,6 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { clearCart } from '../store/cartSlice';
+import { useCartStore } from '../store/hooks';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,9 +12,8 @@ import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 
 const Checkout = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const cartItems = useAppSelector((state) => state.cart.items);
+  const { items, clearCart } = useCartStore();
   const [isProcessing, setIsProcessing] = useState(false);
   
   const [formData, setFormData] = useState({
@@ -31,7 +28,7 @@ const Checkout = () => {
     notes: '',
   });
   
-  const totalAmount = cartItems.reduce(
+  const totalAmount = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
@@ -57,7 +54,7 @@ const Checkout = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (cartItems.length === 0) {
+    if (items.length === 0) {
       toast.error('Your cart is empty');
       return;
     }
@@ -68,7 +65,7 @@ const Checkout = () => {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
       
-      dispatch(clearCart());
+      clearCart();
       toast.success('Order placed successfully!');
       navigate('/order-success');
     } catch (error) {
@@ -78,7 +75,7 @@ const Checkout = () => {
     }
   };
   
-  if (cartItems.length === 0) {
+  if (items.length === 0) {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
         <motion.div 
@@ -280,7 +277,7 @@ const Checkout = () => {
             <h2 className="text-xl font-semibold text-brown-800 mb-6">Order Summary</h2>
             
             <div className="space-y-4 mb-6">
-              {cartItems.map((item) => (
+              {items.map((item) => (
                 <div key={item.id} className="flex items-center">
                   <div className="w-16 h-16 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
                     <img
