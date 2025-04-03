@@ -13,9 +13,11 @@ import {
   Truck, 
   ShieldCheck, 
   RefreshCw, 
-  Star 
+  Star,
+  QrCode
 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -179,8 +181,24 @@ const ProductDetail = () => {
             <span className="ml-2 text-gray-500 text-sm">4.0 (12 reviews)</span>
           </div>
           
-          <div className="text-2xl font-bold text-honey-700 mb-6">
+          <div className="text-2xl font-bold text-honey-700 mb-6 flex items-center">
             ₹{product.price.toLocaleString()}
+            
+            <Popover>
+              <PopoverTrigger asChild>
+                <button className="ml-3 p-1 text-gray-500 hover:text-honey-600 transition-colors">
+                  <QrCode className="h-5 w-5" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <div className="p-4">
+                  <div className="mb-2 text-sm font-medium">Scan to pay</div>
+                  <div className="bg-white p-2 rounded-lg">
+                    <div className="w-32 h-32 bg-[url('https://www.istockphoto.com/photo/qr-code-sample-for-smartphone-scanning-gm1225539869-360594545')] bg-center bg-contain bg-no-repeat"></div>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
           
           <p className="text-gray-700 mb-6">{product.description}</p>

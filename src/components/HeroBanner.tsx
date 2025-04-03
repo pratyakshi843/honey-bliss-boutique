@@ -107,7 +107,7 @@ const HeroBanner = () => {
         >
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1601063458289-77247ba485ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8NHx8aG9uZXl8fDB8fHx8MTcxMjQ3MTgzNXww&ixlib=rb-4.0.3&q=80&w=1080" 
+              src="https://www.istockphoto.com/photo/honey-jar-with-honey-dipper-shot-on-rustic-wooden-table-gm1093966722-293592190" 
               alt="Premium Honey" 
               className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
             />

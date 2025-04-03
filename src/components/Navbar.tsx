@@ -36,10 +36,10 @@ const Navbar = () => {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
             <div className="relative w-10 h-10 bg-honey-500 rounded-full overflow-hidden flex items-center justify-center">
-              <span className="text-white text-2xl font-bold">HB</span>
+              <span className="text-white text-2xl font-bold">RH</span>
               <div className="absolute -top-4 left-0 w-full h-full bg-honey-400 opacity-30 animate-honey-drip"></div>
             </div>
-            <span className="text-2xl font-bold text-brown-800">Honey Bliss</span>
+            <span className="text-2xl font-bold text-brown-800">Rohit's Honey</span>
           </Link>
           
           {/* Desktop Navigation */}
