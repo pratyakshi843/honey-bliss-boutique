@@ -14,6 +14,7 @@ export interface Product {
   premium?: boolean;
   organic?: boolean;
   rawHoney?: boolean;
+  flavored?: boolean;
 }
 
 export const products: Product[] = [
@@ -140,6 +141,49 @@ export const products: Product[] = [
     origin: "Kashmir Valleys",
     bestFor: ["Tea", "Baking", "Yogurt"],
     organic: true
+  },
+  // New flavored honey variants
+  {
+    id: "cinnamon",
+    name: "Cinnamon Infused Honey",
+    description: "Our classic wildflower honey infused with Ceylon cinnamon for a warm, aromatic flavor that pairs perfectly with breakfast foods and desserts.",
+    price: 550,
+    image: "https://images.unsplash.com/photo-1600418867540-8b927af9ab4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8NDB8fGNpbm5hbW9ufHwwfHx8fDE3MTI1NDcyNjF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    weight: "250g",
+    category: "Flavored",
+    flavor: "Warm and spicy",
+    origin: "Uttar Pradesh with Ceylon cinnamon",
+    bestFor: ["Toast", "Oatmeal", "Chai tea", "Desserts"],
+    featured: true,
+    flavored: true
+  },
+  {
+    id: "lavender",
+    name: "Lavender Honey",
+    description: "Delicate floral honey with distinctive lavender notes. Harvested from bees that primarily feed on lavender blooms.",
+    price: 580,
+    image: "https://images.unsplash.com/photo-1528827166428-2bcdbf804cf1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8bGF2ZW5kZXJ8fDB8fHx8MTcxMjU0NzI4N3ww&ixlib=rb-4.0.3&q=80&w=1080",
+    weight: "250g",
+    category: "Flavored",
+    flavor: "Floral and aromatic",
+    origin: "Kashmir Valleys",
+    bestFor: ["Desserts", "Herbal teas", "Cheese pairings"],
+    organic: true,
+    flavored: true
+  },
+  {
+    id: "ginger",
+    name: "Ginger Honey",
+    description: "A zesty infusion of fresh ginger in our premium honey. Excellent for soothing sore throats and adding a warming kick to beverages.",
+    price: 520,
+    image: "https://images.unsplash.com/photo-1573414404855-1164c952dba7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8N3x8Z2luZ2VyfHwwfHx8fDE3MTI1NDczMDl8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    weight: "250g",
+    category: "Flavored",
+    flavor: "Spicy and warming",
+    origin: "Himalayan honey with local ginger",
+    bestFor: ["Teas", "Immune support", "Sore throat remedy"],
+    flavored: true,
+    premium: true
   }
 ];
 
@@ -165,4 +209,8 @@ export const getOrganicProducts = (): Product[] => {
 
 export const getRawHoney = (): Product[] => {
   return products.filter(product => product.rawHoney);
+};
+
+export const getFlavoredHoney = (): Product[] => {
+  return products.filter(product => product.flavored);
 };

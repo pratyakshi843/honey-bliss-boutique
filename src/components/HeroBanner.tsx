@@ -59,12 +59,12 @@ const HeroBanner = () => {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-6xl font-bold mb-4 text-brown-800">
-            <span className="block">Pure Natural</span>
-            <span className="text-honey-600">Honey</span>
+            <span className="block">Pure, Natural Honey</span>
+            <span className="text-honey-600">From Our Hives to Your Home</span>
           </h1>
           <p className="text-xl text-brown-600 mb-8 max-w-lg">
-            Discover the finest selection of 100% pure, natural honey sourced directly 
-            from the pristine valleys of Uttar Pradesh. 
+            Experience the rich flavors of our 100% natural, ethically harvested honey.
+            Each jar is filled with the essence of nature's most perfect sweetener.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
             <Button 
@@ -78,8 +78,24 @@ const HeroBanner = () => {
               className="border-honey-600 text-honey-700 hover:bg-honey-50 font-semibold py-3 px-8 text-lg"
               asChild
             >
-              <a href="/quiz">Find Your Honey</a>
+              <a href="/quiz">Find Your Perfect Honey</a>
             </Button>
+          </div>
+          
+          {/* Stats counter */}
+          <div className="flex justify-around mt-12 gap-4">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-honey-700">100%</div>
+              <div className="text-sm text-brown-600">Natural</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-honey-700">50+</div>
+              <div className="text-sm text-brown-600">Bee Hives</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-honey-700">10+</div>
+              <div className="text-sm text-brown-600">Varieties</div>
+            </div>
           </div>
         </motion.div>
         

@@ -7,6 +7,7 @@ interface Question {
   question: string;
   options: string[];
   selectedOption: string | null;
+  imageUrl?: string;
 }
 
 interface QuizState {
@@ -24,33 +25,38 @@ interface QuizState {
 const initialQuestions = [
   {
     id: 1,
-    question: "What's your preferred sweetness level?",
-    options: ["Very Sweet", "Moderately Sweet", "Subtle Sweetness", "Rich but not too sweet"],
-    selectedOption: null
+    question: "What flavor profile makes your taste buds dance?",
+    options: ["Bold & Rich", "Light & Delicate", "Floral & Aromatic", "Spicy & Warm", "Fruity & Sweet"],
+    selectedOption: null,
+    imageUrl: "https://images.unsplash.com/photo-1563225409-127c18758bd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8NHx8aG9uZXklMjBkaXBwZXJ8fDB8fHx8MTcxMjU0ODA3NHww&ixlib=rb-4.0.3&q=80&w=1080"
   },
   {
     id: 2,
-    question: "How do you plan to use your honey?",
-    options: ["Baking", "Tea/Coffee", "Directly as spread", "Cooking", "Health benefits"],
-    selectedOption: null
+    question: "How do you plan to incorporate honey into your daily routine?",
+    options: ["Morning tea or coffee companion", "Baking delicious treats", "Natural sweetener for everything", "Health and wellness boost", "Part of my skincare regimen"],
+    selectedOption: null,
+    imageUrl: "https://images.unsplash.com/photo-1566313411120-2952f9086ef3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MzZ8fGhvbmV5JTIwdGVhfHwwfHx8fDE3MTI1NDgxMzZ8MA&ixlib=rb-4.0.3&q=80&w=1080"
   },
   {
     id: 3,
-    question: "Do you prefer a specific flavor profile?",
-    options: ["Floral", "Fruity", "Woody/Earthy", "Spicy", "Neutral"],
-    selectedOption: null
+    question: "When you think of the perfect honey consistency, what comes to mind?",
+    options: ["Thick and creamy", "Smooth and runny", "Slightly crystallized", "Whipped and spreadable", "I enjoy variety"],
+    selectedOption: null,
+    imageUrl: "https://images.unsplash.com/photo-1631985037442-34615734824e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mjh8fGhvbmV5JTIwamFyfHwwfHx8fDE3MTI1NDgxNzV8MA&ixlib=rb-4.0.3&q=80&w=1080"
   },
   {
     id: 4,
-    question: "How important is organic certification to you?",
-    options: ["Very important", "Somewhat important", "Not important"],
-    selectedOption: null
+    question: "Which of these qualities matters most to you when selecting honey?",
+    options: ["Organic certification", "Raw and unfiltered", "Local sourcing", "Unique flavor profiles", "Medicinal properties"],
+    selectedOption: null,
+    imageUrl: "https://images.unsplash.com/photo-1519218274327-b43572146216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MzZ8fG9yZ2FuaWMlMjBmb29kfHwwfHx8fDE3MTI1NDgyMDB8MA&ixlib=rb-4.0.3&q=80&w=1080"
   },
   {
     id: 5,
-    question: "Do you have any specific health concerns you're addressing?",
-    options: ["Immune support", "Digestive health", "Energy boost", "Allergy relief", "None specifically"],
-    selectedOption: null
+    question: "Which specific benefit are you hoping to get from your honey?",
+    options: ["Immune system support", "Energy boost", "Seasonal allergy relief", "Better skin and hair", "Simply enjoying the taste"],
+    selectedOption: null,
+    imageUrl: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTR8fGhlYWx0aHl8fDB8fHx8MTcxMjU0ODIzMHww&ixlib=rb-4.0.3&q=80&w=1080"
   }
 ];
 
@@ -72,29 +78,67 @@ export const useQuizStore = create<QuizState>()(
       nextStep: () => set((state) => {
         if (state.currentStep >= state.questions.length - 1) {
           // Quiz is completed
-          const sweetness = state.questions[0].selectedOption;
+          const flavorProfile = state.questions[0].selectedOption;
           const usage = state.questions[1].selectedOption;
-          const flavor = state.questions[2].selectedOption;
+          const consistency = state.questions[2].selectedOption;
+          const quality = state.questions[3].selectedOption;
+          const benefit = state.questions[4].selectedOption;
           
-          // Simple recommendation logic
-          let result = "Wildflower Honey";
-          let recommendedProducts = ["wildflower", "manuka", "forest"];
+          // Enhanced recommendation logic
+          let result = "";
+          let recommendedProducts: string[] = [];
           
-          if (sweetness === "Very Sweet" && flavor === "Floral") {
-            result = "Clover Honey";
-            recommendedProducts = ["clover", "wildflower", "orange-blossom"];
-          } else if (sweetness === "Moderately Sweet" && (flavor === "Woody/Earthy" || flavor === "Spicy")) {
+          // Analyze flavor profile preferences
+          if (flavorProfile === "Bold & Rich") {
             result = "Forest Honey";
-            recommendedProducts = ["forest", "buckwheat", "manuka"];
-          } else if (sweetness === "Subtle Sweetness" && usage === "Health benefits") {
-            result = "Manuka Honey";
-            recommendedProducts = ["manuka", "raw", "acacia"];
-          } else if (flavor === "Fruity") {
-            result = "Orange Blossom Honey";
-            recommendedProducts = ["orange-blossom", "apple-blossom", "wildflower"];
-          } else if (usage === "Baking") {
+            recommendedProducts.push("forest", "buckwheat", "raw");
+          } else if (flavorProfile === "Light & Delicate") {
+            result = "Acacia Honey";
+            recommendedProducts.push("acacia", "clover");
+          } else if (flavorProfile === "Floral & Aromatic") {
             result = "Wildflower Honey";
-            recommendedProducts = ["wildflower", "clover", "acacia"];
+            recommendedProducts.push("wildflower", "lavender");
+          } else if (flavorProfile === "Spicy & Warm") {
+            result = "Cinnamon Infused Honey";
+            recommendedProducts.push("cinnamon", "ginger");
+          } else if (flavorProfile === "Fruity & Sweet") {
+            result = "Orange Blossom Honey";
+            recommendedProducts.push("orange-blossom", "apple-blossom");
+          }
+          
+          // Adjust based on usage
+          if (usage === "Health and wellness boost") {
+            if (!recommendedProducts.includes("manuka")) {
+              recommendedProducts.push("manuka");
+            }
+          } else if (usage === "Baking delicious treats") {
+            if (!recommendedProducts.includes("clover")) {
+              recommendedProducts.push("clover");
+            }
+          }
+          
+          // Adjust based on desired benefits
+          if (benefit === "Immune system support" && !recommendedProducts.includes("manuka")) {
+            recommendedProducts.push("manuka");
+          } else if (benefit === "Seasonal allergy relief" && !recommendedProducts.includes("wildflower")) {
+            recommendedProducts.push("wildflower");
+          }
+          
+          // Make sure we have at least 3 recommendations
+          if (recommendedProducts.length < 3) {
+            const additionalOptions = ["wildflower", "manuka", "forest", "raw", "orange-blossom"]
+              .filter(id => !recommendedProducts.includes(id));
+            
+            while (recommendedProducts.length < 3 && additionalOptions.length > 0) {
+              const randomIndex = Math.floor(Math.random() * additionalOptions.length);
+              recommendedProducts.push(additionalOptions[randomIndex]);
+              additionalOptions.splice(randomIndex, 1);
+            }
+          }
+          
+          // Limit to 3 recommendations
+          if (recommendedProducts.length > 3) {
+            recommendedProducts = recommendedProducts.slice(0, 3);
           }
           
           return {
