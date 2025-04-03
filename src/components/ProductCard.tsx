@@ -2,9 +2,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { addToCart } from '../store/cartSlice';
-import { toggleFavorite } from '../store/favoritesSlice';
+import { useCartStore } from '../store/useCartStore';
+import { useFavoritesStore } from '../store/useFavoritesStore';
 import { toast } from 'sonner';
 import { Product } from '../data/products';
 import { Button } from './ui/button';
@@ -17,32 +16,33 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const dispatch = useAppDispatch();
-  const favorites = useAppSelector((state) => state.favorites.items);
+  const addToCart = useCartStore((state) => state.addToCart);
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+  const favorites = useFavoritesStore((state) => state.items);
   
   const isFavorite = favorites.some(item => item.id === product.id);
   
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
-    dispatch(addToCart({
+    addToCart({
       id: product.id,
       name: product.name,
       price: product.price,
       image: product.image,
       weight: product.weight,
-    }));
+    });
     toast.success(`${product.name} added to cart`);
   };
   
   const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
-    dispatch(toggleFavorite({
+    toggleFavorite({
       id: product.id,
       name: product.name,
       price: product.price,
       image: product.image,
       weight: product.weight,
-    }));
+    });
     
     if (isFavorite) {
       toast.info(`${product.name} removed from favorites`);

@@ -1,7 +1,6 @@
 
-import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { toggleFavorite, clearFavorites } from '../store/favoritesSlice';
-import { addToCart } from '../store/cartSlice';
+import { useFavoritesStore } from '../store/useFavoritesStore';
+import { useCartStore } from '../store/useCartStore';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart, Heart, Trash2, ArrowLeft } from 'lucide-react';
@@ -9,29 +8,31 @@ import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 
 const Favorites = () => {
-  const dispatch = useAppDispatch();
-  const { items } = useAppSelector((state) => state.favorites);
+  const items = useFavoritesStore((state) => state.items);
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+  const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
+  const addToCart = useCartStore((state) => state.addToCart);
   
   const handleRemoveFromFavorites = (id: string, name: string) => {
-    dispatch(toggleFavorite({
+    toggleFavorite({
       id,
       name,
       price: 0,
       image: '',
       weight: '',
-    }));
+    });
     toast.info(`${name} removed from favorites`);
   };
   
   const handleAddToCart = (item: typeof items[0]) => {
-    dispatch(addToCart(item));
+    addToCart(item);
     toast.success(`${item.name} added to cart`);
   };
   
   const handleClearFavorites = () => {
     if (items.length === 0) return;
     
-    dispatch(clearFavorites());
+    clearFavorites();
     toast.info('Favorites cleared');
   };
   

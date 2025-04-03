@@ -1,8 +1,6 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../store/hooks';
-import { login } from '../store/authSlice';
+import { useAuthStore } from '../store/useAuthStore';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -15,7 +13,7 @@ const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
-  const dispatch = useAppDispatch();
+  const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -32,7 +30,7 @@ const LoginForm = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      dispatch(login({ email }));
+      login({ email });
       toast.success('Login successful!');
       navigate('/');
     } catch (error) {

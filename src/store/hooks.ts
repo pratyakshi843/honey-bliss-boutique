@@ -1,6 +1,12 @@
 
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import type { RootState, AppDispatch } from './store';
+// This file is kept for backward compatibility but is no longer needed
+// All components now directly import from the specific store files
+// e.g., useCartStore, useFavoritesStore, etc.
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { useCartStore } from './useCartStore';
+import { useFavoritesStore } from './useFavoritesStore';
+import { useAuthStore } from './useAuthStore';
+import { useQuizStore } from './useQuizStore';
+
+// Re-export for backward compatibility
+export { useCartStore, useFavoritesStore, useAuthStore, useQuizStore };

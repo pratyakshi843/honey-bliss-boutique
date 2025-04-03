@@ -1,12 +1,6 @@
 
 import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { 
-  setSelectedOption, 
-  nextStep, 
-  prevStep, 
-  resetQuiz 
-} from '../store/quizSlice';
+import { useQuizStore } from '../store/useQuizStore';
 import { Button } from './ui/button';
 import { getRecommendedProducts } from '../data/products';
 import ProductCard from './ProductCard';
@@ -14,28 +8,23 @@ import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const HoneyQuiz = () => {
-  const dispatch = useAppDispatch();
-  const { currentStep, questions, completed, result, recommendedProducts } = useAppSelector(
-    (state) => state.quiz
-  );
+  const {
+    currentStep,
+    questions,
+    completed,
+    result,
+    recommendedProducts,
+    setSelectedOption,
+    nextStep,
+    prevStep,
+    resetQuiz
+  } = useQuizStore();
 
   const currentQuestion = questions[currentStep];
   const progress = ((currentStep + (completed ? 1 : 0)) / questions.length) * 100;
   
   const handleOptionSelect = (option: string) => {
-    dispatch(setSelectedOption({ questionId: currentQuestion.id, option }));
-  };
-  
-  const handleNext = () => {
-    dispatch(nextStep());
-  };
-  
-  const handlePrev = () => {
-    dispatch(prevStep());
-  };
-  
-  const handleReset = () => {
-    dispatch(resetQuiz());
+    setSelectedOption(currentQuestion.id, option);
   };
   
   const recommendedProductsData = getRecommendedProducts(recommendedProducts);
@@ -80,7 +69,7 @@ const HoneyQuiz = () => {
             <div className="flex justify-between">
               {currentStep > 0 ? (
                 <Button
-                  onClick={handlePrev}
+                  onClick={prevStep}
                   variant="outline"
                   className="border-honey-500 text-honey-700"
                 >
@@ -92,7 +81,7 @@ const HoneyQuiz = () => {
               )}
               
               <Button
-                onClick={handleNext}
+                onClick={nextStep}
                 className="bg-honey-600 hover:bg-honey-700"
                 disabled={!currentQuestion.selectedOption}
               >
@@ -131,7 +120,7 @@ const HoneyQuiz = () => {
             </div>
             
             <Button
-              onClick={handleReset}
+              onClick={resetQuiz}
               variant="outline"
               className="border-honey-500 text-honey-700"
             >
