@@ -68,7 +68,7 @@ const HeroBanner = () => {
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
             <Button 
-              className="bg-honey-600 hover:bg-honey-700 text-white font-semibold py-3 px-8 text-lg"
+              className="bg-honey-600 hover:bg-brown-700 text-white font-semibold py-3 px-8 text-lg"
               onClick={scrollToProducts}
             >
               Shop Now
@@ -107,8 +107,8 @@ const HeroBanner = () => {
         >
           <div className="relative">
             <img 
-              src="https://cdn.pixabay.com/photo/2018/05/01/13/04/honey-3366722_1280.jpg" 
-              alt="Premium Honey" 
+              src="/lovable-uploads/fb2c6a24-62ea-4089-91c0-1a30b9b93156.png" 
+              alt="Premium Honey Jar with Honey Dipper" 
               className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
             />
             <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 max-w-xs animate-float">
