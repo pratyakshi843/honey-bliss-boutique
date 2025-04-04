@@ -7,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 43 100% 96%;
-    --foreground: 30 10% 15%;
+    --background: 30 30% 96%;
+    --foreground: 20 10% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 30 10% 15%;
+    --card-foreground: 20 10% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 30 10% 15%;
+    --popover-foreground: 20 10% 15%;
 
-    --primary: 36 100% 50%;
-    --primary-foreground: 30 10% 15%;
+    --primary: 15 33% 38%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 15% 95%;
-    --secondary-foreground: 30 10% 15%;
+    --secondary: 15 15% 95%;
+    --secondary-foreground: 20 10% 15%;
 
-    --muted: 30 15% 90%;
-    --muted-foreground: 30 10% 40%;
+    --muted: 15 15% 90%;
+    --muted-foreground: 15 10% 40%;
 
-    --accent: 36 100% 45%;
+    --accent: 15 33% 38%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 15% 85%;
-    --input: 30 15% 85%;
-    --ring: 36 100% 50%;
+    --border: 15 15% 85%;
+    --input: 15 15% 85%;
+    --ring: 15 33% 38%;
 
     --radius: 0.5rem;
 
@@ -69,7 +69,7 @@
   }
 
   .honey-btn {
-    @apply bg-honey-600 hover:bg-honey-700 text-white font-medium py-2 px-4 rounded-md transition-all duration-300 shadow-md hover:shadow-lg;
+    @apply bg-brown-600 hover:bg-brown-700 text-white font-medium py-2 px-4 rounded-md transition-all duration-300 shadow-md hover:shadow-lg;
   }
 
   .card-hover {

@@ -1,4 +1,3 @@
-
 import { type Config } from "tailwindcss";
 
 export default {
@@ -76,7 +75,7 @@ export default {
           "800": "#4e342e",
           "900": "#3e2723",
         },
-        "ocean-blue": "#0EA5E9",
+        "ocean-blue": "#795548",
       },
       keyframes: {
         "accordion-down": {
