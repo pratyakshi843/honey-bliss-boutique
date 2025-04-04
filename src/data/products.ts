@@ -1,4 +1,3 @@
-
 export interface Product {
   id: string;
   name: string;
@@ -52,7 +51,7 @@ export const products: Product[] = [
     name: "Manuka Honey",
     description: "A premium honey known for its therapeutic properties and rich, distinctive taste. Manuka honey comes from the nectar of the Manuka tree flower.",
     price: 1200,
-    image: "https://images.unsplash.com/photo-1628634113229-103b9f7a75e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8OXx8bWFudWthJTIwaG9uZXl8fDB8fHx8MTcxMjQ3MzI2NHww&ixlib=rb-4.0.3&q=80&w=1080",
+    image: "/lovable-uploads/ceeb60f3-6468-459f-9d51-8714f3b7684a.png",
     weight: "250g",
     category: "Premium",
     flavor: "Rich and distinctive",
@@ -66,7 +65,7 @@ export const products: Product[] = [
     name: "Acacia Honey",
     description: "This nearly transparent honey is extremely mild in flavor with hints of vanilla. It's slow to crystallize and perfect for those who prefer a subtle honey taste.",
     price: 520,
-    image: "https://images.unsplash.com/photo-1645437235293-35e31de6aefa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8YWNhY2lhJTIwaG9uZXl8fDB8fHx8MTcxMjQ3MzMxM3ww&ixlib=rb-4.0.3&q=80&w=1080",
+    image: "/lovable-uploads/06a97da8-d248-433d-9f87-36e7d8e9656b.png",
     weight: "500g",
     category: "Specialty",
     flavor: "Mild with vanilla hints",
@@ -79,7 +78,7 @@ export const products: Product[] = [
     name: "Orange Blossom Honey",
     description: "With its distinctive citrus aroma and fruity taste, this honey carries the essence of orange groves. Medium-sweet with a fresh finish.",
     price: 480,
-    image: "/lovable-uploads/7633e79e-8464-4ab4-bd41-f4659b89cc94.png",
+    image: "/lovable-uploads/3c4df525-bdc7-4f11-bdf9-e2d772868fa6.png",
     weight: "500g",
     category: "Specialty",
     flavor: "Citrusy with mild sweetness",
@@ -105,7 +104,7 @@ export const products: Product[] = [
     name: "Forest Honey",
     description: "Collected from the dense forests, this honey has a deep, complex flavor with woody notes and a rich amber color.",
     price: 580,
-    image: "https://images.unsplash.com/photo-1586043826933-07e800e16b3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTR8fGhvbmV5fHwwfHx8fDE3MTI0NzM0ODh8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    image: "/lovable-uploads/c30f713f-9c39-4921-8fb1-280e0a907b6f.png",
     weight: "500g",
     category: "Premium",
     flavor: "Complex with woody notes",
@@ -119,7 +118,7 @@ export const products: Product[] = [
     name: "Raw Unfiltered Honey",
     description: "Completely unprocessed and unpasteurized, our raw honey retains all natural enzymes, vitamins, and beneficial properties. Minimally filtered to remove only the largest particles.",
     price: 650,
-    image: "https://images.unsplash.com/photo-1594941950947-0a68614c9193?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8cmF3JTIwaG9uZXl8fDB8fHx8MTcxMjQ3MzUzN3ww&ixlib=rb-4.0.3&q=80&w=1080",
+    image: "/lovable-uploads/815610ce-aa27-41d8-a0fe-0bb35af99fcd.png",
     weight: "500g",
     category: "Premium",
     flavor: "Bold and natural",
@@ -142,7 +141,6 @@ export const products: Product[] = [
     bestFor: ["Tea", "Baking", "Yogurt"],
     organic: true
   },
-  // Changed from cinnamon to litchi honey
   {
     id: "litchi",
     name: "Litchi Honey",
@@ -162,7 +160,7 @@ export const products: Product[] = [
     name: "Lavender Honey",
     description: "Delicate floral honey with distinctive lavender notes. Harvested from bees that primarily feed on lavender blooms.",
     price: 580,
-    image: "https://images.unsplash.com/photo-1528827166428-2bcdbf804cf1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8bGF2ZW5kZXJ8fDB8fHx8MTcxMjU0NzI4N3ww&ixlib=rb-4.0.3&q=80&w=1080",
+    image: "/lovable-uploads/30558db8-a072-4292-bd7f-cb2bfd8e7dd7.png",
     weight: "250g",
     category: "Flavored",
     flavor: "Floral and aromatic",
@@ -176,7 +174,7 @@ export const products: Product[] = [
     name: "Ginger Honey",
     description: "A zesty infusion of fresh ginger in our premium honey. Excellent for soothing sore throats and adding a warming kick to beverages.",
     price: 520,
-    image: "https://images.unsplash.com/photo-1573414404855-1164c952dba7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8N3x8Z2luZ2VyfHwwfHx8fDE3MTI1NDczMDl8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    image: "/lovable-uploads/5935a13d-1a0e-4d07-b72d-c32adcf890bd.png",
     weight: "250g",
     category: "Flavored",
     flavor: "Spicy and warming",

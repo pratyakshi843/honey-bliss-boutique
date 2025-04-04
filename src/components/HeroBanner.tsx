@@ -107,8 +107,8 @@ const HeroBanner = () => {
         >
           <div className="relative">
             <img 
-              src="/lovable-uploads/fb2c6a24-62ea-4089-91c0-1a30b9b93156.png" 
-              alt="Premium Honey Jar with Honey Dipper" 
+              src="/lovable-uploads/752ea64e-14ec-4e70-b9bd-ae200d3d5e21.png" 
+              alt="Premium Honey Jar" 
               className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
             />
             <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 max-w-xs animate-float">

@@ -141,27 +141,27 @@ const About = () => {
               {
                 title: "Responsible Beekeeping",
                 description: "Our beekeepers practice methods that prioritize bee health and welfare, ensuring strong, thriving colonies.",
-                image: "https://images.unsplash.com/photo-1473973916745-60839aebf06b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8N3x8YmVla2VlcGVyfHwwfHx8fDE3MTI0NzQ5ODB8MA&ixlib=rb-4.0.3&q=80&w=1080"
+                image: "/lovable-uploads/4b012c98-8955-43a1-9ba3-6a0c481a0236.png"
               },
               {
                 title: "Careful Harvesting",
                 description: "Honey is harvested at the peak of ripeness, ensuring optimal flavor and nutritional content.",
-                image: "https://images.unsplash.com/photo-1596394723269-b2cbca4e6e53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8Nnx8aGFydmVzdGluZyUyMGhvbmV5fHwwfHx8fDE3MTI0NzUwMTR8MA&ixlib=rb-4.0.3&q=80&w=1080"
+                image: "/lovable-uploads/87007ee0-c174-4040-99e3-a332904b607e.png"
               },
               {
                 title: "Minimal Processing",
                 description: "We use minimal processing techniques to preserve the natural enzymes, antioxidants, and beneficial compounds in our honey.",
-                image: "https://images.unsplash.com/photo-1679679008383-6f778fe07cbe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTV8fGhvbmV5JTIwcHJvY2Vzc2luZ3x8MHx8fHwxNzEyNDc1MDU0fDA&ixlib=rb-4.0.3&q=80&w=1080"
+                image: "/lovable-uploads/eb440cf1-3cfb-4b06-b9e5-24dc806fba8b.png"
               },
               {
                 title: "Quality Control",
                 description: "Every batch of honey undergoes rigorous testing to ensure purity, quality, and compliance with the highest standards.",
-                image: "https://images.unsplash.com/photo-1652016382526-d9bdeb1803cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8NHx8aG9uZXklMjB0ZXN0aW5nfHwwfHx8fDE3MTI0NzUwODR8MA&ixlib=rb-4.0.3&q=80&w=1080"
+                image: "/lovable-uploads/f6d555c0-d64b-4d3f-a343-d50077f62ef4.png"
               },
               {
                 title: "Eco-Friendly Packaging",
                 description: "We use sustainable, eco-friendly packaging materials to minimize our environmental footprint.",
-                image: "https://images.unsplash.com/photo-1574283073530-b9253f10c606?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTV8fGhvbmV5JTIwcGFja2FnaW5nfHwwfHx8fDE3MTI0NzUxMDV8MA&ixlib=rb-4.0.3&q=80&w=1080"
+                image: "/lovable-uploads/f6d555c0-d64b-4d3f-a343-d50077f62ef4.png"
               }
             ].map((step, index) => (
               <motion.div
