@@ -64,7 +64,7 @@ const Index = () => {
             <Link to="/shop">
               <Button 
                 variant="outline" 
-                className="border-honey-600 text-honey-700 hover:bg-honey-50 text-lg"
+                className="border-honey-600 text-honey-700 hover:bg-ocean-blue hover:text-white hover:border-ocean-blue text-lg transition-colors"
               >
                 View All Products
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -235,7 +235,7 @@ const Index = () => {
             Take our quick quiz to discover which honey variety best suits your taste preferences and needs.
           </p>
           <Link to="/quiz">
-            <Button className="bg-white text-honey-700 hover:bg-honey-50 text-lg py-6 px-8">
+            <Button className="bg-white text-honey-700 hover:bg-ocean-blue hover:text-white transition-colors text-lg py-6 px-8">
               Take the Honey Quiz
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>

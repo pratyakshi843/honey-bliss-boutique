@@ -22,7 +22,7 @@ const HoverableProductCard = ({ product }: HoverableProductCardProps) => {
       
       {/* Overlay with product details on hover */}
       <motion.div 
-        className="absolute inset-0 bg-honey-800/80 backdrop-blur-sm rounded-lg p-4 flex flex-col justify-between overflow-hidden"
+        className="absolute inset-0 bg-honey-800/50 backdrop-blur-sm rounded-lg p-4 flex flex-col justify-between overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.2 }}
