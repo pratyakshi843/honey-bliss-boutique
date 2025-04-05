@@ -15,6 +15,7 @@ const About = () => {
       script.defer = true;
       document.head.appendChild(script);
       
+      // Define initMap function on window object
       window.initMap = () => {
         setMapLoaded(true);
       };
@@ -28,17 +29,17 @@ const About = () => {
     
     return () => {
       // Remove the global initMap function when component unmounts
-      delete window.initMap;
+      window.initMap = () => {};
     };
   }, []);
   
   useEffect(() => {
-    if (mapLoaded) {
+    if (mapLoaded && window.google?.maps) {
       // Initialize the map
       const mapElement = document.getElementById('farm-map');
       if (mapElement) {
         const bijnorCoordinates = { lat: 29.3723, lng: 78.1358 };
-        const map = new google.maps.Map(mapElement, {
+        const map = new window.google.maps.Map(mapElement, {
           center: bijnorCoordinates,
           zoom: 12,
           styles: [
@@ -55,13 +56,13 @@ const About = () => {
           ]
         });
         
-        const marker = new google.maps.Marker({
+        const marker = new window.google.maps.Marker({
           position: bijnorCoordinates,
           map: map,
           title: "Our Honey Farm",
-          animation: google.maps.Animation.DROP,
+          animation: window.google.maps.Animation.DROP,
           icon: {
-            path: google.maps.SymbolPath.CIRCLE,
+            path: window.google.maps.SymbolPath.CIRCLE,
             scale: 10,
             fillColor: "#F59E0B",
             fillOpacity: 0.8,
@@ -70,7 +71,7 @@ const About = () => {
           }
         });
         
-        const infoWindow = new google.maps.InfoWindow({
+        const infoWindow = new window.google.maps.InfoWindow({
           content: `
             <div style="padding: 10px; max-width: 200px;">
               <h3 style="margin-top: 0; color: #78350F; font-weight: bold;">Honey Bliss Boutique</h3>
