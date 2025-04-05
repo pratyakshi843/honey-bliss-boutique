@@ -5,22 +5,22 @@ import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    name: 'Sarah Johnson',
-    location: 'New York, NY',
+    name: 'Priya Sharma',
+    location: 'New Delhi, Delhi',
     image: 'https://randomuser.me/api/portraits/women/12.jpg',
     stars: 5,
     text: "I've tried many honey brands over the years, but nothing compares to the quality and taste of this honey. It's pure, rich, and perfect for my morning tea ritual!"
   },
   {
-    name: 'Michael Chen',
-    location: 'San Francisco, CA',
+    name: 'Arjun Patel',
+    location: 'Mumbai, Maharashtra',
     image: 'https://randomuser.me/api/portraits/men/22.jpg',
     stars: 5,
     text: "As someone who's very careful about food quality, I appreciate how transparent this company is about their beekeeping practices. The honey is exceptional and I love supporting a sustainable business."
   },
   {
-    name: 'Emma Wilson',
-    location: 'Portland, OR',
+    name: 'Divya Agarwal',
+    location: 'Bangalore, Karnataka',
     image: 'https://randomuser.me/api/portraits/women/32.jpg',
     stars: 4,
     text: "The manuka honey has become a staple in my home. I use it for everything from sore throats to natural skincare. Worth every penny for its quality and effectiveness."

@@ -75,7 +75,7 @@ const HeroBanner = () => {
             </Button>
             <Button 
               variant="outline" 
-              className="border-honey-600 text-honey-700 hover:bg-honey-100 font-semibold py-3 px-8 text-lg"
+              className="border-honey-600 text-honey-700 hover:bg-honey-100 font-semibold py-3 px-8 text-lg hover:bg-amber-200 hover:text-brown-800 transition-colors duration-300"
               asChild
             >
               <a href="/quiz">Find Your Perfect Honey</a>
@@ -107,7 +107,7 @@ const HeroBanner = () => {
         >
           <div className="relative">
             <img 
-              src="/lovable-uploads/4b012c98-8955-43a1-9ba3-6a0c481a0236.png" 
+              src="/lovable-uploads/d20ff5f9-4a0f-4c03-8e0e-900bbaba002f.png" 
               alt="Premium Honey Jar" 
               className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
             />

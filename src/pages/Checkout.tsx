@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/hooks';
@@ -63,7 +62,6 @@ const Checkout = () => {
     setIsProcessing(true);
     
     try {
-      // Save order data to backend (simulation)
       console.log('Saving order data:', {
         customerInfo: {
           fullName: formData.fullName,
@@ -86,7 +84,6 @@ const Checkout = () => {
         status: 'pending',
       });
       
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
       
       clearCart();
@@ -264,11 +261,10 @@ const Checkout = () => {
                 </p>
                 <div className="flex flex-col items-center">
                   <div className="bg-white p-4 rounded-lg border inline-block shadow-md">
-                    {/* QR code image */}
                     <img 
-                      src="/lovable-uploads/fb2c6a24-62ea-4089-91c0-1a30b9b93156.png" 
+                      src="/lovable-uploads/69d2da0a-d1dc-40cc-8937-e8c2180124d1.png" 
                       alt="UPI QR Code" 
-                      className="w-48 h-48 object-contain"
+                      className="w-64 h-64 object-contain"
                     />
                   </div>
                   <p className="mt-4 text-xs text-center text-gray-500 max-w-xs">
