@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
@@ -6,6 +7,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Checkbox } from './ui/checkbox';
 import { toast } from 'sonner';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 
 const SignupForm = () => {
   const [name, setName] = useState('');
@@ -14,6 +16,8 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
   const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
@@ -40,7 +44,14 @@ const SignupForm = () => {
     
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Save user data to backend (simulation)
+      console.log('Saving new user data:', {
+        name,
+        email,
+        timestamp: new Date().toISOString()
+      });
       
       login({ email, name });
       toast.success('Account created successfully!');
@@ -50,6 +61,14 @@ const SignupForm = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
   
   return (
@@ -63,6 +82,8 @@ const SignupForm = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          disabled={isLoading}
+          className="mt-1"
         />
       </div>
       
@@ -75,31 +96,57 @@ const SignupForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          disabled={isLoading}
+          className="mt-1"
         />
       </div>
       
       <div>
         <Label htmlFor="password">Password</Label>
-        <Input
-          id="password"
-          type="password"
-          placeholder="••••••••"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div className="relative">
+          <Input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={isLoading}
+            className="mt-1"
+          />
+          <button 
+            type="button" 
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            onClick={toggleShowPassword}
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
       </div>
       
       <div>
         <Label htmlFor="confirmPassword">Confirm Password</Label>
-        <Input
-          id="confirmPassword"
-          type="password"
-          placeholder="••••••••"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+        <div className="relative">
+          <Input
+            id="confirmPassword"
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="••••••••"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            disabled={isLoading}
+            className="mt-1"
+          />
+          <button 
+            type="button" 
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            onClick={toggleShowConfirmPassword}
+            tabIndex={-1}
+          >
+            {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
       </div>
       
       <div className="flex items-center space-x-2">
@@ -125,7 +172,14 @@ const SignupForm = () => {
         className="w-full bg-honey-600 hover:bg-honey-700"
         disabled={isLoading}
       >
-        {isLoading ? 'Creating account...' : 'Create Account'}
+        {isLoading ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Creating account...
+          </>
+        ) : (
+          'Create Account'
+        )}
       </Button>
       
       <div className="text-center text-sm text-gray-500">

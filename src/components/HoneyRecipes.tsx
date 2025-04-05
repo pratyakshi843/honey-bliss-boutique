@@ -1,10 +1,11 @@
-
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Printer, Share2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 const recipes = [
   {
@@ -84,6 +85,157 @@ const uses = [
 const HoneyRecipes = () => {
   const [activeRecipe, setActiveRecipe] = useState(recipes[0].id);
   const [activeUse, setActiveUse] = useState(uses[0].id);
+  
+  const handlePrintRecipe = () => {
+    const currentRecipe = recipes.find(recipe => recipe.id === activeRecipe);
+    
+    if (!currentRecipe) {
+      toast.error("Couldn't find recipe to print");
+      return;
+    }
+    
+    const printWindow = window.open('', '_blank');
+    
+    if (printWindow) {
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>${currentRecipe.name} Recipe</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+              }
+              .header {
+                text-align: center;
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 20px;
+              }
+              h1 {
+                color: #795548;
+                margin-bottom: 10px;
+              }
+              .meta {
+                color: #666;
+                font-size: 14px;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-top: 10px;
+              }
+              .description {
+                font-style: italic;
+                margin-bottom: 20px;
+              }
+              .section {
+                margin-bottom: 30px;
+              }
+              h2 {
+                color: #ffa000;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 5px;
+              }
+              ul, ol {
+                padding-left: 20px;
+              }
+              li {
+                margin-bottom: 8px;
+              }
+              .footer {
+                text-align: center;
+                margin-top: 40px;
+                font-size: 12px;
+                color: #999;
+              }
+              @media print {
+                body {
+                  font-size: 12pt;
+                }
+                button {
+                  display: none;
+                }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <h1>${currentRecipe.name}</h1>
+              <div class="description">${currentRecipe.description}</div>
+              <div class="meta">
+                <span>Difficulty: ${currentRecipe.difficulty}</span>
+                <span>Prep Time: ${currentRecipe.prepTime}</span>
+                <span>Category: ${currentRecipe.category}</span>
+              </div>
+            </div>
+            
+            <div class="section">
+              <h2>Ingredients</h2>
+              <ul>
+                ${currentRecipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+              </ul>
+            </div>
+            
+            <div class="section">
+              <h2>Instructions</h2>
+              <p>${currentRecipe.instructions}</p>
+            </div>
+            
+            <div class="footer">
+              <p>Recipe from Honey Bee - Visit us at honeybeefarm.com</p>
+              <p>Printed on ${new Date().toLocaleDateString()}</p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+              <button onclick="window.print()" style="padding: 10px 20px; background: #ffa000; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                Print Recipe
+              </button>
+            </div>
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      
+      console.log('Saving user recipe print data:', {
+        recipeId: currentRecipe.id,
+        recipeName: currentRecipe.name,
+        action: 'print',
+        timestamp: new Date().toISOString()
+      });
+      
+      toast.success('Recipe ready to print!');
+    } else {
+      toast.error('Unable to open print window. Please check your popup blocker settings.');
+    }
+  };
+  
+  const handleShareRecipe = () => {
+    const currentRecipe = recipes.find(recipe => recipe.id === activeRecipe);
+    
+    if (currentRecipe && navigator.share) {
+      navigator.share({
+        title: `${currentRecipe.name} Recipe`,
+        text: `Check out this delicious ${currentRecipe.name} recipe!`,
+        url: window.location.href
+      })
+      .then(() => toast.success('Recipe shared successfully!'))
+      .catch(() => toast.error('Unable to share recipe'));
+    } else {
+      navigator.clipboard.writeText(window.location.href)
+        .then(() => toast.success('Recipe URL copied to clipboard!'))
+        .catch(() => toast.error('Unable to copy URL'));
+    }
+    
+    console.log('Saving user recipe share data:', {
+      recipeId: currentRecipe?.id,
+      recipeName: currentRecipe?.name,
+      action: 'share',
+      timestamp: new Date().toISOString()
+    });
+  };
   
   return (
     <div className="py-16 bg-amber-50">
@@ -170,9 +322,22 @@ const HoneyRecipes = () => {
                                 <p className="text-sm">{recipe.instructions}</p>
                               </div>
                             </CardContent>
-                            <CardFooter>
-                              <Button variant="outline" className="text-honey-700 border-honey-500 hover:bg-honey-50">
+                            <CardFooter className="flex justify-between">
+                              <Button 
+                                variant="outline" 
+                                className="text-honey-700 border-honey-500 hover:bg-honey-100"
+                                onClick={handlePrintRecipe}
+                              >
+                                <Printer className="mr-2 h-4 w-4" />
                                 Print Recipe
+                              </Button>
+                              <Button 
+                                variant="ghost" 
+                                className="text-honey-700 hover:bg-honey-100"
+                                onClick={handleShareRecipe}
+                              >
+                                <Share2 className="mr-2 h-4 w-4" />
+                                Share
                               </Button>
                             </CardFooter>
                           </div>
@@ -241,7 +406,18 @@ const HoneyRecipes = () => {
                               </ul>
                             </CardContent>
                             <CardFooter>
-                              <Button variant="outline" className="text-honey-700 border-honey-500 hover:bg-honey-50">
+                              <Button 
+                                variant="outline" 
+                                className="text-honey-700 border-honey-500 hover:bg-honey-100"
+                                onClick={() => {
+                                  toast.success('Coming soon!');
+                                  console.log('Saving user honey use click data:', {
+                                    useId: use.id,
+                                    useTitle: use.title,
+                                    timestamp: new Date().toISOString()
+                                  });
+                                }}
+                              >
                                 Learn More
                               </Button>
                             </CardFooter>

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/hooks';
@@ -9,7 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Loader2 } from 'lucide-react';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -62,6 +63,29 @@ const Checkout = () => {
     setIsProcessing(true);
     
     try {
+      // Save order data to backend (simulation)
+      console.log('Saving order data:', {
+        customerInfo: {
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          pincode: formData.pincode,
+        },
+        orderDetails: {
+          items: items,
+          totalAmount: totalAmount,
+          shippingFee: shippingFee,
+          finalAmount: finalAmount,
+          paymentMethod: formData.paymentMethod,
+          notes: formData.notes,
+        },
+        timestamp: new Date().toISOString(),
+        status: 'pending',
+      });
+      
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
       
@@ -215,8 +239,12 @@ const Checkout = () => {
                 <RadioGroupItem value="upi" id="upi" />
                 <Label htmlFor="upi" className="flex-1 cursor-pointer">UPI / QR Payment</Label>
                 <div className="flex space-x-2">
-                  <div className="w-8 h-8 bg-blue-500 rounded-md"></div>
-                  <div className="w-8 h-8 bg-green-500 rounded-md"></div>
+                  <div className="w-8 h-8 bg-blue-500 rounded-md flex items-center justify-center text-white font-bold">
+                    G
+                  </div>
+                  <div className="w-8 h-8 bg-green-500 rounded-md flex items-center justify-center text-white font-bold">
+                    P
+                  </div>
                 </div>
               </div>
               
@@ -230,17 +258,23 @@ const Checkout = () => {
             </RadioGroup>
             
             {formData.paymentMethod === 'upi' && (
-              <div className="bg-gray-50 p-4 rounded-lg mb-6">
+              <div className="bg-gray-50 p-6 rounded-lg mb-6">
                 <p className="text-sm text-gray-700 mb-4">
-                  If you select UPI payment, you'll need to scan the QR code at the time of delivery.
+                  Please scan the QR code below to complete your payment via UPI.
                 </p>
-                <div className="flex justify-center">
-                  <div className="bg-white p-3 rounded-lg border inline-block">
-                    {/* Replace with actual QR code image */}
-                    <div className="w-32 h-32 bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-500 text-xs">QR Code</span>
-                    </div>
+                <div className="flex flex-col items-center">
+                  <div className="bg-white p-4 rounded-lg border inline-block shadow-md">
+                    {/* QR code image */}
+                    <img 
+                      src="/lovable-uploads/fb2c6a24-62ea-4089-91c0-1a30b9b93156.png" 
+                      alt="UPI QR Code" 
+                      className="w-48 h-48 object-contain"
+                    />
                   </div>
+                  <p className="mt-4 text-xs text-center text-gray-500 max-w-xs">
+                    After scanning the QR code, please enter your UPI PIN to complete the payment. 
+                    Your order will be processed once payment is confirmed.
+                  </p>
                 </div>
               </div>
             )}
@@ -262,8 +296,17 @@ const Checkout = () => {
               className="w-full bg-honey-600 hover:bg-honey-700 text-lg py-6"
               disabled={isProcessing}
             >
-              {isProcessing ? 'Processing...' : 'Place Order'}
-              {!isProcessing && <ChevronRight className="ml-2 h-5 w-5" />}
+              {isProcessing ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                <>
+                  Place Order
+                  <ChevronRight className="ml-2 h-5 w-5" />
+                </>
+              )}
             </Button>
           </form>
         </motion.div>
