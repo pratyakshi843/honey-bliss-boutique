@@ -48,7 +48,6 @@ export const useCartStore = create<CartState>()(
             description: `${item.name} has been added to your cart${item.price >= 500 ? " with free shipping!" : "."}`,
             duration: 3000,
             variant: item.price >= 500 ? "default" : "default",
-            position: "bottom-center",
           });
           
           return newState;
