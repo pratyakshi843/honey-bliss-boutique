@@ -2,26 +2,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const testimonials = [
   {
     name: 'Priya Sharma',
     location: 'New Delhi, Delhi',
-    image: 'https://randomuser.me/api/portraits/women/12.jpg',
+    image: 'https://randomuser.me/api/portraits/women/42.jpg',
+    initials: 'PS',
     stars: 5,
     text: "I've tried many honey brands over the years, but nothing compares to the quality and taste of this honey. It's pure, rich, and perfect for my morning tea ritual!"
   },
   {
     name: 'Arjun Patel',
     location: 'Mumbai, Maharashtra',
-    image: 'https://randomuser.me/api/portraits/men/22.jpg',
+    image: 'https://randomuser.me/api/portraits/men/76.jpg',
+    initials: 'AP',
     stars: 5,
     text: "As someone who's very careful about food quality, I appreciate how transparent this company is about their beekeeping practices. The honey is exceptional and I love supporting a sustainable business."
   },
   {
     name: 'Divya Agarwal',
     location: 'Bangalore, Karnataka',
-    image: 'https://randomuser.me/api/portraits/women/32.jpg',
+    image: 'https://randomuser.me/api/portraits/women/63.jpg',
+    initials: 'DA',
     stars: 4,
     text: "The manuka honey has become a staple in my home. I use it for everything from sore throats to natural skincare. Worth every penny for its quality and effectiveness."
   }
@@ -68,11 +72,10 @@ const Testimonials = () => {
               <p className="text-gray-600 mb-6 italic">"{testimonial.text}"</p>
               
               <div className="flex items-center">
-                <img 
-                  src={testimonial.image} 
-                  alt={testimonial.name} 
-                  className="h-12 w-12 rounded-full object-cover border-2 border-honey-200"
-                />
+                <Avatar className="h-12 w-12 border-2 border-honey-200">
+                  <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                  <AvatarFallback className="bg-honey-200 text-honey-700">{testimonial.initials}</AvatarFallback>
+                </Avatar>
                 <div className="ml-4">
                   <h4 className="font-semibold text-brown-700">{testimonial.name}</h4>
                   <p className="text-sm text-gray-500">{testimonial.location}</p>
