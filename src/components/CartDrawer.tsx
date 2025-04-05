@@ -11,10 +11,16 @@ const CartDrawer = () => {
          addToCart, removeItemCompletely, clearCart } = useCartStore();
   const cartRef = useRef<HTMLDivElement>(null);
 
+  // Calculate if any individual item qualifies for free shipping
+  const hasFreeShippingItem = items.some(item => item.price >= 500);
+  
   const totalAmount = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  // Free shipping if any product is more than 500 or total is over 999
+  const shippingFee = hasFreeShippingItem || totalAmount >= 999 ? 0 : 100;
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -97,6 +103,9 @@ const CartDrawer = () => {
                     <p className="text-sm text-gray-500">{item.weight}</p>
                     <p className="text-honey-700 font-medium mt-1">
                       ₹{item.price.toLocaleString()}
+                      {item.price >= 500 && (
+                        <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">Free Shipping</span>
+                      )}
                     </p>
                   </div>
                   <div className="flex flex-col items-center ml-2">
@@ -143,12 +152,12 @@ const CartDrawer = () => {
               </div>
               <div className="flex justify-between mb-2">
                 <span>Shipping</span>
-                <span>Free</span>
+                <span>{shippingFee === 0 ? 'Free' : `₹${shippingFee}`}</span>
               </div>
               <Separator className="my-2" />
               <div className="flex justify-between font-semibold mb-4">
                 <span>Total</span>
-                <span>₹{totalAmount.toLocaleString()}</span>
+                <span className="text-honey-700">₹{(totalAmount + shippingFee).toLocaleString()}</span>
               </div>
               <Button
                 className="w-full bg-honey-600 hover:bg-honey-700"

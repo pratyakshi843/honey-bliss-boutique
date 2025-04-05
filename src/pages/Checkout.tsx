@@ -33,7 +33,8 @@ const Checkout = () => {
     0
   );
   
-  const shippingFee = totalAmount >= 999 ? 0 : 100;
+  const hasFreeShippingItem = items.some(item => item.price >= 500);
+  const shippingFee = hasFreeShippingItem || totalAmount >= 999 ? 0 : 100;
   const finalAmount = totalAmount + shippingFee;
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -328,6 +329,11 @@ const Checkout = () => {
                   <div className="ml-4 flex-1">
                     <h3 className="font-medium">{item.name}</h3>
                     <p className="text-sm text-gray-500">{item.weight} x {item.quantity}</p>
+                    {item.price >= 500 && (
+                      <span className="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">
+                        Free Shipping
+                      </span>
+                    )}
                   </div>
                   <div className="text-honey-700 font-medium">
                     ₹{(item.price * item.quantity).toLocaleString()}
@@ -355,10 +361,12 @@ const Checkout = () => {
             
             <div className="mt-6 p-4 bg-honey-50 rounded-lg">
               <p className="text-sm text-gray-700">
-                {shippingFee === 0 ? (
-                  "You've qualified for free shipping!"
+                {hasFreeShippingItem ? (
+                  "You have items eligible for free shipping!"
+                ) : shippingFee === 0 ? (
+                  "You've qualified for free shipping with your order total!"
                 ) : (
-                  `Add ₹${999 - totalAmount} more to your cart to qualify for free shipping.`
+                  `Add ₹${999 - totalAmount} more to your cart to qualify for free shipping, or add any product over ₹500.`
                 )}
               </p>
             </div>

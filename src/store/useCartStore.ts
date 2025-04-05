@@ -1,6 +1,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { toast } from '@/hooks/use-toast';
 
 export interface CartItem {
   id: string;
@@ -27,21 +28,32 @@ export const useCartStore = create<CartState>()(
     (set) => ({
       items: [],
       isOpen: false,
-      addToCart: (item) => set((state) => {
-        const existingItem = state.items.find((i) => i.id === item.id);
-        
-        if (existingItem) {
-          return {
-            items: state.items.map((i) =>
-              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-            ),
-          };
-        } else {
-          return {
-            items: [...state.items, { ...item, quantity: 1 }],
-          };
-        }
-      }),
+      addToCart: (item) => {
+        set((state) => {
+          const existingItem = state.items.find((i) => i.id === item.id);
+          
+          const newState = existingItem
+            ? {
+                items: state.items.map((i) =>
+                  i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+                ),
+              }
+            : {
+                items: [...state.items, { ...item, quantity: 1 }],
+              };
+          
+          // Show toast notification
+          toast({
+            title: item.price >= 500 ? "Free Shipping Eligible!" : "Added to Cart",
+            description: `${item.name} has been added to your cart${item.price >= 500 ? " with free shipping!" : "."}`,
+            duration: 3000,
+            variant: item.price >= 500 ? "default" : "default",
+            position: "bottom-center",
+          });
+          
+          return newState;
+        });
+      },
       removeFromCart: (id) => set((state) => {
         const existingItem = state.items.find((i) => i.id === id);
         
