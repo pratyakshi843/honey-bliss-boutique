@@ -8,7 +8,7 @@ const testimonials = [
   {
     name: 'Priya Sharma',
     location: 'New Delhi, Delhi',
-    image: 'https://randomuser.me/api/portraits/women/42.jpg',
+    image: 'https://randomuser.me/api/portraits/women/28.jpg',
     initials: 'PS',
     stars: 5,
     text: "I've tried many honey brands over the years, but nothing compares to the quality and taste of this honey. It's pure, rich, and perfect for my morning tea ritual!"
@@ -16,7 +16,7 @@ const testimonials = [
   {
     name: 'Arjun Patel',
     location: 'Mumbai, Maharashtra',
-    image: 'https://randomuser.me/api/portraits/men/76.jpg',
+    image: 'https://randomuser.me/api/portraits/men/53.jpg',
     initials: 'AP',
     stars: 5,
     text: "As someone who's very careful about food quality, I appreciate how transparent this company is about their beekeeping practices. The honey is exceptional and I love supporting a sustainable business."
@@ -24,7 +24,7 @@ const testimonials = [
   {
     name: 'Divya Agarwal',
     location: 'Bangalore, Karnataka',
-    image: 'https://randomuser.me/api/portraits/women/63.jpg',
+    image: 'https://randomuser.me/api/portraits/women/33.jpg',
     initials: 'DA',
     stars: 4,
     text: "The manuka honey has become a staple in my home. I use it for everything from sore throats to natural skincare. Worth every penny for its quality and effectiveness."
