@@ -17,18 +17,22 @@ const ThemeSwitcher = () => {
   
   return (
     <Button
-      variant="ghost"
-      size="icon"
       onClick={handleToggleTheme}
-      className="rounded-full transition-colors"
+      variant="outline"
+      className="flex items-center gap-2 rounded-md transition-colors"
       aria-label="Toggle theme"
     >
       {theme === "light" ? (
-        <Moon className="h-5 w-5 text-brown-700 hover:text-brown-900" />
+        <>
+          <Moon className="h-5 w-5" />
+          <span className="hidden sm:inline">Dark mode</span>
+        </>
       ) : (
-        <Sun className="h-5 w-5 text-honey-400 hover:text-honey-300" />
+        <>
+          <Sun className="h-5 w-5" />
+          <span className="hidden sm:inline">Light mode</span>
+        </>
       )}
-      <span className="sr-only">{theme === "light" ? "Dark" : "Light"} mode</span>
     </Button>
   );
 };

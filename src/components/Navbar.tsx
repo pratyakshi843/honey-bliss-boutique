@@ -60,11 +60,15 @@ const Navbar = () => {
             <Link to="/contact" className={`font-medium hover:text-honey-600 transition-colors dark:hover:text-honey-400 dark:text-gray-200 ${isActive('/contact')}`}>
               Contact
             </Link>
+            
+            <ThemeSwitcher />
           </div>
           
           {/* Action buttons */}
           <div className="flex items-center space-x-4">
-            <ThemeSwitcher />
+            <div className="md:hidden">
+              <ThemeSwitcher />
+            </div>
             
             <Link to="/favorites" className="relative p-2 hover:bg-honey-100 dark:hover:bg-honey-900/30 rounded-full transition-colors">
               <Heart className="w-6 h-6 text-gray-700 dark:text-gray-300" />
