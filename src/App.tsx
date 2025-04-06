@@ -1,72 +1,72 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './pages/Home';
+import Shop from './pages/Shop';
+import ProductDetails from './pages/ProductDetails';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Account from './pages/Account';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import HoneyQuiz from './pages/HoneyQuiz';
+import Favorites from './pages/Favorites';
+import NotFound from './pages/NotFound';
+import { ThemeProvider } from './context/ThemeContext';
+import Settings from './pages/Settings';
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Index from "./pages/Index";
-import Shop from "./pages/Shop";
-import QuizPage from "./pages/QuizPage";
-import ProductDetail from "./pages/ProductDetail";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Favorites from "./pages/Favorites";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Checkout from "./pages/Checkout";
-import OrderSuccess from "./pages/OrderSuccess";
-import Account from "./pages/Account";
-import NotFound from "./pages/NotFound";
-import Reviews from "./pages/Reviews";
-import { ThemeProvider } from "./context/ThemeContext";
-
-// Create a client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000,
-      refetchOnWindowFocus: false,
-    },
+const routes = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <NotFound />,
   },
-});
+  {
+    path: "/shop",
+    element: <Shop />,
+  },
+  {
+    path: "/product/:id",
+    element: <ProductDetails />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/account",
+    element: <Account />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/quiz",
+    element: <HoneyQuiz />,
+  },
+  {
+    path: "/favorites",
+    element: <Favorites />,
+  },
+  {
+    path: "/settings",
+    element: <Settings />,
+  },
+]);
 
-const App = () => {
+function App() {
   return (
     <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner position="top-right" closeButton />
-          <BrowserRouter>
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-grow">
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/shop" element={<Shop />} />
-                  <Route path="/quiz" element={<QuizPage />} />
-                  <Route path="/product/:id" element={<ProductDetail />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
-                  <Route path="/favorites" element={<Favorites />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/order-success" element={<OrderSuccess />} />
-                  <Route path="/account" element={<Account />} />
-                  <Route path="/reviews" element={<Reviews />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
+      <RouterProvider router={routes} />
     </ThemeProvider>
   );
-};
+}
 
 export default App;

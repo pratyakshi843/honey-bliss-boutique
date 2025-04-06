@@ -6,9 +6,20 @@ type ThemeType = "light" | "dark";
 interface ThemeContextType {
   theme: ThemeType;
   toggleTheme: () => void;
+  setTheme: (theme: ThemeType) => void;
+  colorIntensity: number;
+  setColorIntensity: (intensity: number) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const defaultContext: ThemeContextType = {
+  theme: "light",
+  toggleTheme: () => {},
+  setTheme: () => {},
+  colorIntensity: 75,
+  setColorIntensity: () => {}
+};
+
+const ThemeContext = createContext<ThemeContextType>(defaultContext);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   // Check user preference or system preference
@@ -31,6 +42,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const [theme, setTheme] = useState<ThemeType>(getInitialTheme);
+  const [colorIntensity, setColorIntensity] = useState<number>(
+    parseInt(localStorage.getItem("colorIntensity") || "75")
+  );
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -44,6 +58,14 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     // Save to localStorage
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem("colorIntensity", colorIntensity.toString());
+    
+    // Here you could add custom CSS variables based on color intensity
+    // For example:
+    // document.documentElement.style.setProperty('--honey-saturation', `${colorIntensity}%`);
+  }, [colorIntensity]);
 
   // Subscribe to system theme changes
   useEffect(() => {
@@ -65,7 +87,15 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider 
+      value={{ 
+        theme, 
+        toggleTheme, 
+        setTheme, 
+        colorIntensity, 
+        setColorIntensity 
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );
@@ -73,7 +103,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;

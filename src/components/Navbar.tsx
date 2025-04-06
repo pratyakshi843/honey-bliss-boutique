@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, Heart, User, Menu, X } from 'lucide-react';
+import { ShoppingCart, Heart, User, Menu, X, Settings } from 'lucide-react';
 import { useCartStore, useFavoritesStore, useAuthStore } from '../store/hooks';
 import { Button } from './ui/button';
 import CartDrawer from './CartDrawer';
@@ -60,15 +60,15 @@ const Navbar = () => {
             <Link to="/contact" className={`font-medium hover:text-honey-600 transition-colors dark:hover:text-honey-400 dark:text-gray-200 ${isActive('/contact')}`}>
               Contact
             </Link>
-            
-            <ThemeSwitcher />
           </div>
           
           {/* Action buttons */}
-          <div className="flex items-center space-x-4">
-            <div className="md:hidden">
-              <ThemeSwitcher />
-            </div>
+          <div className="flex items-center space-x-3">
+            <Link to="/settings" className="p-2 hover:bg-honey-100 dark:hover:bg-honey-900/30 rounded-full transition-colors">
+              <Settings className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+            </Link>
+            
+            <ThemeSwitcher variant="ghost" />
             
             <Link to="/favorites" className="relative p-2 hover:bg-honey-100 dark:hover:bg-honey-900/30 rounded-full transition-colors">
               <Heart className="w-6 h-6 text-gray-700 dark:text-gray-300" />
@@ -146,6 +146,13 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
+              </Link>
+              <Link 
+                to="/settings" 
+                className={`px-4 py-2 font-medium hover:bg-honey-100 dark:hover:bg-honey-900/30 dark:text-gray-200 rounded-md transition-colors ${isActive('/settings')}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Settings
               </Link>
             </div>
           </div>

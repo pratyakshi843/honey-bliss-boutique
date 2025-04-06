@@ -4,7 +4,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher = ({ variant = "outline", showText = false }) => {
   const { theme, toggleTheme } = useTheme();
   
   const handleToggleTheme = () => {
@@ -18,19 +18,20 @@ const ThemeSwitcher = () => {
   return (
     <Button
       onClick={handleToggleTheme}
-      variant="outline"
-      className="flex items-center gap-2 rounded-md transition-colors"
+      variant={variant}
+      size={showText ? "default" : "icon"}
+      className="transition-colors"
       aria-label="Toggle theme"
     >
       {theme === "light" ? (
         <>
-          <Moon className="h-5 w-5" />
-          <span className="hidden sm:inline">Dark mode</span>
+          <Moon className="h-[1.2rem] w-[1.2rem]" />
+          {showText && <span className="ml-2">Dark mode</span>}
         </>
       ) : (
         <>
-          <Sun className="h-5 w-5" />
-          <span className="hidden sm:inline">Light mode</span>
+          <Sun className="h-[1.2rem] w-[1.2rem]" />
+          {showText && <span className="ml-2">Light mode</span>}
         </>
       )}
     </Button>
