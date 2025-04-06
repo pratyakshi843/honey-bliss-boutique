@@ -18,7 +18,7 @@ const ThemeSwitcher = ({ variant = "outline", showText = false }) => {
   return (
     <Button
       onClick={handleToggleTheme}
-      variant={variant}
+      variant={variant as "outline" | "default" | "destructive" | "secondary" | "ghost" | "link"}
       size={showText ? "default" : "icon"}
       className="transition-colors"
       aria-label="Toggle theme"
