@@ -13,7 +13,6 @@ import Favorites from './pages/Favorites';
 import NotFound from './pages/NotFound';
 import { ThemeProvider } from './context/ThemeContext';
 import Settings from './pages/Settings';
-import { Toaster } from "./components/ui/sonner";
 
 const routes = createBrowserRouter([
   {
@@ -67,7 +66,6 @@ function App() {
   return (
     <ThemeProvider>
       <RouterProvider router={routes} />
-      <Toaster />
     </ThemeProvider>
   );
 }

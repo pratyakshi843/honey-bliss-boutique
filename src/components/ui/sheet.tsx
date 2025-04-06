@@ -1,4 +1,3 @@
-
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
@@ -43,7 +42,7 @@ const sheetVariants = cva(
       },
     },
     defaultVariants: {
-      side: "bottom",
+      side: "right",
     },
   }
 )
@@ -55,7 +54,7 @@ interface SheetContentProps
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ side = "bottom", className, children, ...props }, ref) => (
+>(({ side = "right", className, children, ...props }, ref) => (
   <SheetPortal>
     <SheetOverlay />
     <SheetPrimitive.Content
@@ -129,3 +128,4 @@ export {
   Sheet, SheetClose,
   SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetOverlay, SheetPortal, SheetTitle, SheetTrigger
 }
+
