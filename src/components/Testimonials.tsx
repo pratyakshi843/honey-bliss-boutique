@@ -3,7 +3,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Link } from 'react-router-dom';
 
 const testimonials = [
   {
@@ -34,7 +33,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-amber-50 dark:from-brown-900 dark:to-brown-800">
+    <section className="py-16 bg-gradient-to-b from-white to-amber-50">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -42,8 +41,8 @@ const Testimonials = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-brown-800 dark:text-honey-300 mb-4">What Our Customers Say</h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-brown-800 mb-4">What Our Customers Say</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Don't just take our word for it - hear what our satisfied customers have to say about our honey products.
           </p>
         </motion.div>
@@ -55,7 +54,7 @@ const Testimonials = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.2 }}
-              className="bg-white dark:bg-brown-700 rounded-lg shadow-md p-6 relative"
+              className="bg-white rounded-lg shadow-md p-6 relative"
             >
               <div className="absolute -top-4 -left-4 bg-honey-500 rounded-full p-2">
                 <Quote className="text-white h-4 w-4" />
@@ -65,21 +64,21 @@ const Testimonials = () => {
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
-                    className={`h-4 w-4 ${i < testimonial.stars ? 'fill-honey-500 text-honey-500' : 'text-gray-300 dark:text-gray-600'}`} 
+                    className={`h-4 w-4 ${i < testimonial.stars ? 'fill-honey-500 text-honey-500' : 'text-gray-300'}`} 
                   />
                 ))}
               </div>
               
-              <p className="text-gray-600 dark:text-gray-200 mb-6 italic">"{testimonial.text}"</p>
+              <p className="text-gray-600 mb-6 italic">"{testimonial.text}"</p>
               
               <div className="flex items-center">
-                <Avatar className="h-12 w-12 border-2 border-honey-200 dark:border-honey-700">
+                <Avatar className="h-12 w-12 border-2 border-honey-200">
                   <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                  <AvatarFallback className="bg-honey-200 text-honey-700 dark:bg-honey-700 dark:text-honey-200">{testimonial.initials}</AvatarFallback>
+                  <AvatarFallback className="bg-honey-200 text-honey-700">{testimonial.initials}</AvatarFallback>
                 </Avatar>
                 <div className="ml-4">
-                  <h4 className="font-semibold text-brown-700 dark:text-brown-100">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.location}</p>
+                  <h4 className="font-semibold text-brown-700">{testimonial.name}</h4>
+                  <p className="text-sm text-gray-500">{testimonial.location}</p>
                 </div>
               </div>
             </motion.div>
@@ -92,12 +91,12 @@ const Testimonials = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
           className="mt-12 text-center"
         >
-          <Link 
-            to="/reviews" 
-            className="text-honey-600 dark:text-honey-400 hover:text-honey-700 dark:hover:text-honey-300 font-medium underline underline-offset-4"
+          <a 
+            href="/about" 
+            className="text-honey-600 hover:text-honey-700 font-medium underline underline-offset-4"
           >
-            Read more customer reviews
-          </Link>
+            Read more customer stories
+          </a>
         </motion.div>
       </div>
     </section>
