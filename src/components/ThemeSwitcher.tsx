@@ -8,9 +8,11 @@ const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useTheme();
   
   const handleToggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
     toggleTheme();
-    toast(`Switched to ${theme === "light" ? "dark" : "light"} mode`, {
-      description: `App appearance has been changed to ${theme === "light" ? "dark" : "light"} mode.`,
+    
+    toast(`Switched to ${newTheme} mode`, {
+      description: `App appearance has been changed to ${newTheme} mode.`,
       position: "top-right",
     });
   };
